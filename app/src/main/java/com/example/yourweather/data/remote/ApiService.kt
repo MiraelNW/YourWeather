@@ -1,12 +1,15 @@
 package com.example.yourweather.data.remote
 
+import android.util.Log
+import com.example.yourweather.data.remote.model.CityCoordDto
+import com.example.yourweather.data.remote.model.ListOfCitiesDto
 import com.example.yourweather.data.remote.model.WeatherByCoord
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiService {
 
-    @GET("forecast")
+    @GET("v1/forecast")
      suspend fun getForecastByGeoCords(
         @Query("latitude") latitude:Double,
         @Query("longitude") longitude:Double,
@@ -22,4 +25,10 @@ interface ApiService {
         @Query("daily")    apparent_temperature_min :String = "apparent_temperature_min",
         @Query("timezone") timezone :String = "auto",
     ):WeatherByCoord
+
+     @GET("search")
+     suspend fun getCoordByCityName(
+         @Query("name")city :String,
+         @Query ("count") count :Int =1
+     ):ListOfCitiesDto
 }

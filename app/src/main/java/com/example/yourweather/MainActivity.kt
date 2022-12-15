@@ -35,10 +35,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         coroutineScope.launch {
-            val res = ApiFactory.apiService.getForecastByGeoCords(55.04, 82.93)
+            val res = ApiFactory.apiServiceForecast.getForecastByGeoCords(55.04, 82.93)
            db.insertHourlyWeatherInfo( mapper.mapHourlyWeatherDtoToHourlyWeatherDbModel( res.hourly))
            db.insertDailyWeatherInfo( mapper.mapDailyWeatherDtoToDailyWeatherDbModel( res.daily))
-            Log.d("Main", ApiFactory.apiService.getForecastByGeoCords(55.04, 82.93).toString())
+            Log.d("Main", ApiFactory.apiServiceForecast.getForecastByGeoCords(55.04, 82.93).toString())
+            Log.d("Main", ApiFactory.apiServiceCoord.getCoordByCityName("Novosibirsk").toString())
         }
 
         setContentView(binding.root)
