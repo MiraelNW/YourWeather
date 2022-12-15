@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             Log.d("Main", ApiFactory.apiService.getForecastByGeoCords(55.04, 82.93).toString())
         }
 
-        //setContentView(binding.root)
+        setContentView(binding.root)
         //startAnimation()
 
 

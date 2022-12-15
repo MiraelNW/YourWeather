@@ -4,9 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.yourweather.data.remote.model.DailyWeatherDto
-import com.example.yourweather.data.remote.model.HourlyWeatherDto
-import kotlinx.coroutines.internal.synchronized
+import androidx.room.TypeConverter
 
 @Database(entities = [HourlyWeatherDbModel::class,DailyWeatherDbModel::class], version = 1, exportSchema = false)
 abstract class AppDataBase : RoomDatabase() {

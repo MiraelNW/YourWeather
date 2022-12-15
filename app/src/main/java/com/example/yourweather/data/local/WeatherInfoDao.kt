@@ -3,6 +3,7 @@ package com.example.yourweather.data.local
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
+import androidx.room.TypeConverter
 
 @Dao
 interface WeatherInfoDao {
@@ -11,5 +12,5 @@ interface WeatherInfoDao {
     suspend fun insertHourlyWeatherInfo(hourlyWeatherDbModel: HourlyWeatherDbModel)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertDailyWeatherInfo(dailyWeatherDbModel: DailyWeatherDbModel)
+    suspend fun insertDailyWeatherInfo( dailyWeatherDbModel: DailyWeatherDbModel)
 }

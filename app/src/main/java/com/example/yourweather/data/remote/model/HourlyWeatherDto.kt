@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 data class HourlyWeatherDto(
     @SerializedName("time")
     @Expose
-    var time: List<String>? = null,
+    var time: List<String>,
     @SerializedName("apparent_temperature")
     @Expose
     var apparentTemperature: List<Double>? = null,

@@ -43,6 +43,7 @@ class Mapper {
     fun mapHourlyWeatherDbModelToHourlyDto(
         hourlyWeatherDbModel: HourlyWeatherDbModel
     ) = HourlyWeatherDto(
+        time=hourlyWeatherDbModel.time,
         apparentTemperature=hourlyWeatherDbModel.apparentTemperature,
         snowfall=hourlyWeatherDbModel.snowfall,
         visibility=hourlyWeatherDbModel.visibility,
