@@ -9,20 +9,23 @@ data class HourlyWeatherDto(
     var time: List<String>,
     @SerializedName("apparent_temperature")
     @Expose
-    var apparentTemperature: List<Double>? = null,
+    var apparentTemperature: List<Double>,
     @SerializedName("snowfall")
     @Expose
-    var snowfall: List<Double>? = null,
+    var snowfall: List<Double>,
     @SerializedName("visibility")
     @Expose
-    var visibility: List<Double>? = null,
+    var visibility: List<Double>,
     @SerializedName("windspeed_10m")
     @Expose
-    var windSpeed10m: List<Double>? = null,
+    var windSpeed10m: List<Double>,
     @SerializedName("winddirection_10m")
     @Expose
-    var windDirection10m: List<Int>? = null,
+    var windDirection10m: List<Int>,
     @SerializedName("shortwave_radiation")
     @Expose
-    var shortwaveRadiation: List<Double>? = null
+    var shortwaveRadiation: List<Double>,
+    @SerializedName("relativehumidity_2m")
+    @Expose
+    var relativehumidity_2m: List<Int>
 )

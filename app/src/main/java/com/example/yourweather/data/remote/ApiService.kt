@@ -10,25 +10,26 @@ import retrofit2.http.Query
 interface ApiService {
 
     @GET("v1/forecast")
-     suspend fun getForecastByGeoCords(
-        @Query("latitude") latitude:Double,
-        @Query("longitude") longitude:Double,
-        @Query("hourly")   apparent_temperature :String = "apparent_temperature",
-        @Query("hourly")   snowfall :String = "snowfall",
-        @Query("hourly")   visibility :String = "visibility",
-        @Query("hourly")   windspeed_10m :String = "windspeed_10m",
-        @Query("hourly")   winddirection_10m :String = "winddirection_10m",
-        @Query("hourly")   shortwave_radiation :String = "shortwave_radiation",
-        @Query("daily")    sunrise :String = "sunrise",
-        @Query("daily")    sunset :String = "sunset",
-        @Query("daily")    apparent_temperature_max :String = "apparent_temperature_max",
-        @Query("daily")    apparent_temperature_min :String = "apparent_temperature_min",
-        @Query("timezone") timezone :String = "auto",
-    ):WeatherByCoord
+    suspend fun getForecastByGeoCords(
+        @Query("latitude") latitude: Double,
+        @Query("longitude") longitude: Double,
+        @Query("hourly") apparent_temperature: String = "apparent_temperature",
+        @Query("hourly") snowfall: String = "snowfall",
+        @Query("hourly") visibility: String = "visibility",
+        @Query("hourly") windspeed_10m: String = "windspeed_10m",
+        @Query("hourly") winddirection_10m: String = "winddirection_10m",
+        @Query("hourly") shortwave_radiation: String = "shortwave_radiation",
+        @Query("hourly") relativehumidity_2m: String = "relativehumidity_2m",
+        @Query("daily") sunrise: String = "sunrise",
+        @Query("daily") sunset: String = "sunset",
+        @Query("daily") apparent_temperature_max: String = "apparent_temperature_max",
+        @Query("daily") apparent_temperature_min: String = "apparent_temperature_min",
+        @Query("timezone") timezone: String = "auto",
+    ): WeatherByCoord
 
-     @GET("search")
-     suspend fun getCoordByCityName(
-         @Query("name")city :String,
-         @Query ("count") count :Int =1
-     ):ListOfCitiesDto
+    @GET("search")
+    suspend fun getCoordByCityName(
+        @Query("name") city: String,
+        @Query("count") count: Int = 1
+    ): ListOfCitiesDto
 }

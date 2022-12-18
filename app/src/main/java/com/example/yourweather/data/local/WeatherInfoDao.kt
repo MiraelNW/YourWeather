@@ -3,7 +3,8 @@ package com.example.yourweather.data.local
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
-import androidx.room.TypeConverter
+import com.example.yourweather.data.local.models.DailyWeatherDbModel
+import com.example.yourweather.data.local.models.HourlyWeatherDbModel
 
 @Dao
 interface WeatherInfoDao {

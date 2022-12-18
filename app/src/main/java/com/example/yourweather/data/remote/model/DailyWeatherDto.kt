@@ -9,14 +9,14 @@ data class DailyWeatherDto(
     var time: List<String>,
     @SerializedName("sunrise")
     @Expose
-    var sunrise: List<String>? = null,
+    var sunrise: List<String>,
     @SerializedName("sunset")
     @Expose
-    var sunset: List<String>? = null,
+    var sunset: List<String>,
     @SerializedName("apparent_temperature_max")
     @Expose
-    var apparentTemperatureMax: List<Double>? = null,
+    var apparentTemperatureMax: List<Double>,
     @SerializedName("apparent_temperature_min")
     @Expose
-    var apparentTemperatureMin: List<Double>? = null
+    var apparentTemperatureMin: List<Double>
 )

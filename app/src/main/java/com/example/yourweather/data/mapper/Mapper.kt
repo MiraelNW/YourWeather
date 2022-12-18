@@ -1,54 +1,36 @@
 package com.example.yourweather.data.mapper
 
-import com.example.yourweather.data.local.DailyWeatherDbModel
-import com.example.yourweather.data.local.HourlyWeatherDbModel
+import com.example.yourweather.data.local.models.DailyWeatherDbModel
+import com.example.yourweather.data.local.models.HourlyWeatherDbModel
 import com.example.yourweather.data.remote.model.DailyWeatherDto
 import com.example.yourweather.data.remote.model.HourlyWeatherDto
 
 class Mapper {
 
     fun mapHourlyWeatherDtoToHourlyWeatherDbModel(
-        hourlyDto: HourlyWeatherDto
+        hourlyDto: HourlyWeatherDto,
+        hour: Int
     ) = HourlyWeatherDbModel(
-        time= hourlyDto.time,
-        apparentTemperature=hourlyDto.apparentTemperature,
-        snowfall=hourlyDto.snowfall,
-        visibility=hourlyDto.visibility,
-        windSpeed10m=hourlyDto.windSpeed10m,
-        windDirection10m=hourlyDto.windDirection10m,
-        shortwaveRadiation=hourlyDto.shortwaveRadiation
+        hourlyTime = hourlyDto.time[hour],
+        apparentTemperature=hourlyDto.apparentTemperature[hour],
+        snowfall=hourlyDto.snowfall[hour],
+        visibility=hourlyDto.visibility[hour],
+        windSpeed10m=hourlyDto.windSpeed10m[hour],
+        windDirection10m=hourlyDto.windDirection10m[hour],
+        shortwaveRadiation=hourlyDto.shortwaveRadiation[hour],
+        relativehumidity_2m=hourlyDto.relativehumidity_2m[hour]
     )
 
     fun mapDailyWeatherDtoToDailyWeatherDbModel(
-        dailyWeatherDto: DailyWeatherDto
+        dailyWeatherDto: DailyWeatherDto,
+        index: Int
     ) = DailyWeatherDbModel(
-        time= dailyWeatherDto.time,
-        sunrise=dailyWeatherDto.sunrise,
-        sunset=dailyWeatherDto.sunset,
-        apparentTemperatureMax=dailyWeatherDto.apparentTemperatureMax,
-        apparentTemperatureMin=dailyWeatherDto.apparentTemperatureMin
+        dailyTime= dailyWeatherDto.time[index],
+        sunrise=dailyWeatherDto.sunrise[index],
+        sunset=dailyWeatherDto.sunset[index],
+        apparentTemperatureMax=dailyWeatherDto.apparentTemperatureMax[index],
+        apparentTemperatureMin=dailyWeatherDto.apparentTemperatureMin[index]
     )
 
-    fun mapDailyWeatherDbModelToDailyDto(
-        dailyWeatherDbModel: DailyWeatherDbModel
-    ) = DailyWeatherDto(
-        time =dailyWeatherDbModel.time,
-        sunrise=dailyWeatherDbModel.sunrise,
-        sunset=dailyWeatherDbModel.sunset,
-        apparentTemperatureMax=dailyWeatherDbModel.apparentTemperatureMax,
-        apparentTemperatureMin=dailyWeatherDbModel.apparentTemperatureMin,
 
-    )
-
-    fun mapHourlyWeatherDbModelToHourlyDto(
-        hourlyWeatherDbModel: HourlyWeatherDbModel
-    ) = HourlyWeatherDto(
-        time=hourlyWeatherDbModel.time,
-        apparentTemperature=hourlyWeatherDbModel.apparentTemperature,
-        snowfall=hourlyWeatherDbModel.snowfall,
-        visibility=hourlyWeatherDbModel.visibility,
-        windSpeed10m=hourlyWeatherDbModel.windSpeed10m,
-        windDirection10m=hourlyWeatherDbModel.windDirection10m,
-        shortwaveRadiation=hourlyWeatherDbModel.shortwaveRadiation
-    )
 }

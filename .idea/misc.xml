@@ -3,10 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/1/AndroidStudioProjects/YourWeather/app/src/main/res/drawable-v24/ic_keyboard_arrow_down_black_24dp.xml" value="0.2155" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/YourWeather/app/src/main/res/drawable-v24/ic_keyboard_arrow_up_black_24dp.xml" value="0.2155" />
         <entry key="..\:/Users/1/AndroidStudioProjects/YourWeather/app/src/main/res/drawable-v24/ic_splash_bg_ellipse.xml" value="0.1" />
         <entry key="..\:/Users/1/AndroidStudioProjects/YourWeather/app/src/main/res/drawable-v24/ic_splash_big_cloud.xml" value="0.2155" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/YourWeather/app/src/main/res/drawable-v24/ic_splash_bottom_drawable.xml" value="0.2155" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/YourWeather/app/src/main/res/drawable-v24/ic_splash_small_cloud.xml" value="0.2155" />
         <entry key="..\:/Users/1/AndroidStudioProjects/YourWeather/app/src/main/res/drawable-v24/splash_logo.xml" value="0.196" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/YourWeather/app/src/main/res/layout/activity_hourly.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/1/AndroidStudioProjects/YourWeather/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/YourWeather/app/src/main/res/layout/activity_weather.xml" value="0.33" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/YourWeather/app/src/main/res/layout/daily_weather_item.xml" value="0.33" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/YourWeather/app/src/main/res/layout/fragment_detail_weather_info.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/YourWeather/app/src/main/res/layout/weather.xml" value="0.33" />
       </map>
     </option>
   </component>
