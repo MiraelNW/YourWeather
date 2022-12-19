@@ -11,17 +11,19 @@ import com.example.yourweather.data.mapper.Mapper
 import com.example.yourweather.data.remote.ApiFactory
 import com.example.yourweather.data.repositoryImpl.WeatherRepositoryImpl
 import com.example.yourweather.databinding.ActivityMainBinding
+import com.example.yourweather.domain.GetDailyWeatherInfoUseCase
+import com.example.yourweather.domain.GetHourlyWeatherInfoUseCase
 import com.example.yourweather.domain.LoadDataUseCase
 import com.mikhaellopez.rxanimation.*
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    val mapper = Mapper()
-    val scope = CoroutineScope(Dispatchers.IO)
+
     val disposable = CompositeDisposable()
 
     private val binding by lazy {
@@ -40,14 +42,8 @@ class MainActivity : AppCompatActivity() {
         binding.buttonExplore.setOnClickListener {
             endSplashAnimation()
         }
-        val dao = AppDataBase.getInstance(this).weatherInfoDao()
-        val repo = WeatherRepositoryImpl(dao,mapper)
-        val useCase = LoadDataUseCase(repo)
-        val weatherInfoDao = AppDataBase.getInstance(this).weatherInfoDao()
-        scope.launch {
-            useCase(55.0,60.0)
 
-        }
+
 
     }
 

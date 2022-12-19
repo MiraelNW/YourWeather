@@ -24,7 +24,9 @@ interface ApiService {
         @Query("daily") sunset: String = "sunset",
         @Query("daily") apparent_temperature_max: String = "apparent_temperature_max",
         @Query("daily") apparent_temperature_min: String = "apparent_temperature_min",
+        @Query("daily") precipitation_sum: String = "precipitation_sum",
         @Query("timezone") timezone: String = "auto",
+
     ): WeatherByCoord
 
     @GET("search")

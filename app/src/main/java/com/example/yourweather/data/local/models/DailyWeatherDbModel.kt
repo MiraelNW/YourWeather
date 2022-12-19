@@ -10,8 +10,9 @@ import com.example.yourweather.data.local.Converters
 data class DailyWeatherDbModel(
     @PrimaryKey
     var dailyTime:String,
-    var sunrise:String? = null,
-    var sunset:String? = null,
-    var apparentTemperatureMax:Double? = null,
-    var apparentTemperatureMin:Double? = null,
+    var sunrise:String,
+    var sunset:String,
+    var apparentTemperatureMax:Double,
+    var apparentTemperatureMin:Double,
+    var precipitation_sum:Double,
 )

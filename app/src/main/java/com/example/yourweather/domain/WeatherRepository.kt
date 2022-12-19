@@ -1,12 +1,16 @@
 package com.example.yourweather.domain
 
 import androidx.lifecycle.LiveData
+import com.example.yourweather.domain.entity.DailyWeatherInfo
+import com.example.yourweather.domain.entity.HourlyWeatherInfo
 
 interface WeatherRepository {
 
-    suspend fun getDailyWeather(longitude:Double,latitude:Double): LiveData<DailyWeatherInfo>
+    fun getDailyWeatherByTheTime(time: String): DailyWeatherInfo
 
-    suspend fun getHourlyWeather(longitude:Double,latitude:Double): LiveData<HourlyWeatherInfo>
+    fun getListDailyWeather(): LiveData<List<DailyWeatherInfo>>
 
-    suspend fun loadData(longitude:Double,latitude:Double)
+    fun getHourlyWeatherByTheTime(time: String): HourlyWeatherInfo
+
+    suspend fun loadData(longitude: Double, latitude: Double)
 }

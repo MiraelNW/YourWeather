@@ -18,5 +18,8 @@ data class DailyWeatherDto(
     var apparentTemperatureMax: List<Double>,
     @SerializedName("apparent_temperature_min")
     @Expose
-    var apparentTemperatureMin: List<Double>
+    var apparentTemperatureMin: List<Double>,
+    @SerializedName("precipitation_sum")
+    @Expose
+    var precipitation_sum: List<Double>
 )
