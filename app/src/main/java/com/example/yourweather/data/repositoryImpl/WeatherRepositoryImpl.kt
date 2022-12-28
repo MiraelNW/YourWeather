@@ -20,6 +20,7 @@ class WeatherRepositoryImpl(
 
     override fun getDailyWeatherByTheTime(time: String): LiveData<DailyWeatherInfo> {
         return Transformations.map(weatherInfoDao.getDailyWeatherByTime(time)) {
+            Log.d("main",time)
             mapper.mapDailyWeatherDbToDailyWeatherInfo(it)
         }
     }

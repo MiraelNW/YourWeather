@@ -70,11 +70,11 @@ class Mapper {
 
     private fun mapDailyTime(dailyTime: String): String {
         val date = SimpleDateFormat("yyyy-MM-dd").parse(dailyTime)
-        val c = Calendar.getInstance()
+        val calendar = Calendar.getInstance()
         date?.let {
-            c.time = it
+            calendar.time = it
         }
-        val dayOfWeek = c[Calendar.DAY_OF_WEEK]
+        val dayOfWeek = calendar[Calendar.DAY_OF_WEEK]
         return when (dayOfWeek) {
             1 -> "Sunday"
             2 -> "Monday"

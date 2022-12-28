@@ -1,6 +1,7 @@
 package com.example.yourweather.presentation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,11 +26,26 @@ class WeatherDetailInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d("args",parseArgs())
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun parseArgs():String{
+       return requireArguments().getString(DATE) ?: ""
     }
 
     companion object{
-        fun newInstance():WeatherDetailInfoFragment{
-            return WeatherDetailInfoFragment()
+        private const val DATE = "date"
+        fun newInstance(date : String):WeatherDetailInfoFragment{
+            return WeatherDetailInfoFragment().apply {
+                arguments = Bundle().apply {
+                    putString(DATE,date)
+                }
+            }
         }
     }
 }

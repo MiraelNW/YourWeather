@@ -17,6 +17,7 @@ import java.util.*
 
 class WeatherAdapter : ListAdapter<DailyWeatherInfo, WeatherViewHolder>(WeatherInfoDiffCallback()) {
 
+    var onWeekdayClickListener : OnWeekdayClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherViewHolder {
         val binding = DailyWeatherItemBinding.inflate(
@@ -30,10 +31,13 @@ class WeatherAdapter : ListAdapter<DailyWeatherInfo, WeatherViewHolder>(WeatherI
     override fun onBindViewHolder(holder: WeatherViewHolder, position: Int) {
         val weatherInfo = getItem(position)
         with(holder.binding) {
+
+
             apparentTemperatureTv.text =String.format("%s°",weatherInfo.temperature_2m_max?.toInt().toString())
             theHighestTemperature.text =String.format("%s°",weatherInfo.apparentTemperatureMax?.toInt().toString())
             theLowestTemperature.text =String.format("%s°",weatherInfo.apparentTemperatureMin?.toInt().toString())
             nameOfTheDayTv.text = weatherInfo.dailyTime
+
             when (weatherInfo.weatherCode) {
                 0 -> Picasso.get().load(R.drawable.ic_clear_day).into(weatherImage)
                 1, 2 -> Picasso.get().load(R.drawable.ic_few_clouds).into(weatherImage)
@@ -51,6 +55,15 @@ class WeatherAdapter : ListAdapter<DailyWeatherInfo, WeatherViewHolder>(WeatherI
             }
         }
 
+        holder.binding.root.setOnClickListener {
+            onWeekdayClickListener?.onWeekdayClick(weatherInfo.dailyTime)
+        }
 
+    }
+
+
+
+    interface OnWeekdayClickListener{
+        fun onWeekdayClick(date : String)
     }
 }
