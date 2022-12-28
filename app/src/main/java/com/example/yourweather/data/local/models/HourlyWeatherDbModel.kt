@@ -16,5 +16,6 @@ data class HourlyWeatherDbModel(
     var windSpeed10m: Double,
     var windDirection10m: Int,
     var shortwaveRadiation: Double,
-    var relativehumidity_2m: Int
+    var relativehumidity_2m: Int,
+    var temperature_2m: Double,
 )

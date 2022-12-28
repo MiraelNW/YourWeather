@@ -1,4 +1,4 @@
-package com.example.yourweather.data.remote.model
+package com.example.yourweather.data.remote.model.coords
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

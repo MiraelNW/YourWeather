@@ -21,7 +21,7 @@
             android:layout_margin="4dp"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,14 +38,14 @@
             tools:src="@drawable/ic_cloudy_weather" />
 
         <TextView
-            android:id="@+id/precipitationSumTv"
+            android:id="@+id/apparentTemperatureTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:padding="2dp"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/precipitationSumTv">
+            app:layout_constraintTop_toBottomOf="@id/apparentTemperatureTv">
             <ImageView
                 android:id="@+id/arrow_up"
                 android:layout_width="0dp"

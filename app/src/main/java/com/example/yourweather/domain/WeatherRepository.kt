@@ -6,11 +6,11 @@ import com.example.yourweather.domain.entity.HourlyWeatherInfo
 
 interface WeatherRepository {
 
-    fun getDailyWeatherByTheTime(time: String): DailyWeatherInfo
+    fun getDailyWeatherByTheTime(time: String): LiveData<DailyWeatherInfo>
 
     fun getListDailyWeather(): LiveData<List<DailyWeatherInfo>>
 
-    fun getHourlyWeatherByTheTime(time: String): HourlyWeatherInfo
+    suspend fun getHourlyWeatherByTheTime(time: String): LiveData<HourlyWeatherInfo>
 
-    suspend fun loadData(longitude: Double, latitude: Double)
+    suspend fun loadCordsFromCityName(cityName:String)
 }
