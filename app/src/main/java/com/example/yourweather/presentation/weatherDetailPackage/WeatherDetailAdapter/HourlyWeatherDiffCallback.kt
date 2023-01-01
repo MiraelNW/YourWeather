@@ -3,7 +3,7 @@ package com.example.yourweather.presentation.weatherDetailPackage.WeatherDetailA
 import androidx.recyclerview.widget.DiffUtil
 import com.example.yourweather.domain.entity.HourlyWeatherInfo
 
-class HourlyWeatherDiffCallback : DiffUtil.ItemCallback<HourlyWeatherInfo>() {
+object HourlyWeatherDiffCallback : DiffUtil.ItemCallback<HourlyWeatherInfo>() {
     override fun areItemsTheSame(oldItem: HourlyWeatherInfo, newItem: HourlyWeatherInfo): Boolean {
         return oldItem.apparentTemperature == newItem.apparentTemperature
     }

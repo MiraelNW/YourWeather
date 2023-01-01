@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso
 import kotlin.math.roundToInt
 
 class DailyWeatherAdapter :
-    ListAdapter<DailyWeatherInfo, DailyWeatherViewHolder>(DailyWeatherInfoDiffCallback()) {
+    ListAdapter<DailyWeatherInfo, DailyWeatherViewHolder>(DailyWeatherInfoDiffCallback) {
 
     var onWeekdayClickListener: OnWeekdayClickListener? = null
 
@@ -29,7 +29,6 @@ class DailyWeatherAdapter :
 
     override fun onBindViewHolder(holder: DailyWeatherViewHolder, position: Int) {
         val weatherInfo = getItem(position)
-        Log.d("time", position.toString())
         with(holder.binding) {
             when (position) {
                 0 -> {

@@ -11,7 +11,7 @@ import com.squareup.picasso.Picasso
 import kotlin.math.roundToInt
 
 class HourlyWeatherAdapter
-    : ListAdapter<HourlyWeatherInfo, HourlyWeatherViewHolder>(HourlyWeatherDiffCallback()) {
+    : ListAdapter<HourlyWeatherInfo, HourlyWeatherViewHolder>(HourlyWeatherDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HourlyWeatherViewHolder {
         val binding = HourlyWeatherItemBinding.inflate(

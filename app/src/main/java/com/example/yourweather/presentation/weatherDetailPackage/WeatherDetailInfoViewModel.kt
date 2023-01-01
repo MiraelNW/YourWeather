@@ -2,6 +2,7 @@ package com.example.yourweather.presentation.weatherDetailPackage
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import com.example.yourweather.data.local.AppDataBase
 import com.example.yourweather.data.mapper.Mapper
 import com.example.yourweather.data.repositoryImpl.WeatherRepositoryImpl
@@ -10,16 +11,13 @@ import com.example.yourweather.domain.GetHourlyWeatherInfoUseCase
 import com.example.yourweather.domain.GetListHourlyWeatherInfoUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Inject
 
-class WeatherDetailInfoViewModel(application: Application) : AndroidViewModel(application) {
+class WeatherDetailInfoViewModel @Inject constructor(
+     val hourlyWeather: GetHourlyWeatherInfoUseCase,
+     val dailyWeather : GetDailyWeatherInfoUseCase,
+     val listOfHourlyWeather: GetListHourlyWeatherInfoUseCase,
+) : ViewModel() {
 
-    val mapper = Mapper()
-    val dao = AppDataBase.getInstance(application).weatherInfoDao()
-    val repo = WeatherRepositoryImpl(dao, mapper)
 
-    val hourlyWeather = GetHourlyWeatherInfoUseCase(repo)
-
-    val listOfHourlyWeather = GetListHourlyWeatherInfoUseCase(repo)
-
-    val dailyWeather = GetDailyWeatherInfoUseCase(repo)
 }

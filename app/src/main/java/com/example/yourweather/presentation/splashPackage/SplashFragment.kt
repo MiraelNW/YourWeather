@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.yourweather.R
+import com.example.yourweather.utils.WeatherApp
 import com.example.yourweather.databinding.SplashFragmentBinding
 import com.example.yourweather.presentation.searchPackage.SearchFragment
 import com.mikhaellopez.rxanimation.*
@@ -15,13 +16,20 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 
 class SplashFragment : Fragment() {
 
+    private val component by lazy {
+        (requireActivity().application as WeatherApp).component
+    }
 
     private val disposable = CompositeDisposable()
 
-    private var _binding : SplashFragmentBinding? = null
-    private val binding : SplashFragmentBinding
+    private var _binding: SplashFragmentBinding? = null
+    private val binding: SplashFragmentBinding
         get() = _binding ?: throw RuntimeException("SplashFragmentBinding is null")
 
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,11 +43,6 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         startAnimation()
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        //component
     }
 
     override fun onDestroyView() {
@@ -82,8 +85,8 @@ class SplashFragment : Fragment() {
 
                 binding.imageViewMainCloud.fadeIn(500L),
 
-            )
-                .doOnTerminate(){
+                )
+                .doOnTerminate() {
                     endSplashAnimation()
                 }
                 .subscribe()
@@ -119,17 +122,20 @@ class SplashFragment : Fragment() {
                 )
             )
                 .doOnTerminate {
-                   requireActivity().supportFragmentManager.beginTransaction()
-                       .replace(R.id.fragment_container_splash_search, SearchFragment.newInstance())
-                       .commit()
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(
+                            R.id.fragment_container_splash_search,
+                            SearchFragment.newInstance()
+                        )
+                        .commit()
                 }
                 .subscribe()
 
         )
     }
 
-    companion object{
-        fun newInstance():Fragment{
+    companion object {
+        fun newInstance(): Fragment {
             return SplashFragment()
         }
     }

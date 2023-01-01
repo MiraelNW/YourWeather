@@ -1,6 +1,8 @@
 package com.example.yourweather.domain
 
-class LoadDataUseCase(private val repository: WeatherRepository) {
+import javax.inject.Inject
+
+class LoadDataUseCase @Inject constructor(private val repository: WeatherRepository) {
     suspend operator fun invoke(
         cityName:String
     ) = repository.loadCordsFromCityName(cityName)

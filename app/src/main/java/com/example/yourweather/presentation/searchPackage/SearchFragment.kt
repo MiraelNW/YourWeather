@@ -1,5 +1,6 @@
 package com.example.yourweather.presentation.searchPackage
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,18 +9,30 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.yourweather.utils.ViewModelFactory
+import com.example.yourweather.utils.WeatherApp
 import com.example.yourweather.databinding.SearchFragmentBinding
 import com.example.yourweather.presentation.splashPackage.WeatherActivity
+import javax.inject.Inject
 
 class SearchFragment : Fragment() {
 
-    private val viewModel by lazy {
-        ViewModelProvider(requireActivity())[SearchViewModel::class.java]
+    private val component by lazy {
+        (requireActivity().application as WeatherApp).component
     }
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+    private lateinit var viewModel: SearchViewModel
 
     private var _binding: SearchFragmentBinding? = null
     private val binding: SearchFragmentBinding
         get() = _binding ?: throw RuntimeException("SearchFragmentBinding is null")
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,6 +47,8 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.showWeather.setOnClickListener {
             val cityName = binding.cityName.text.toString().trim()
+            viewModel =
+                ViewModelProvider(requireActivity(), viewModelFactory)[SearchViewModel::class.java]
             observeViewModel(cityName)
         }
     }

@@ -8,8 +8,9 @@ import com.example.yourweather.domain.entity.DailyWeatherInfo
 import com.example.yourweather.domain.entity.HourlyWeatherInfo
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
-class Mapper {
+class Mapper @Inject constructor(){
 
     fun mapHourlyWeatherDtoToHourlyWeatherDbModel(
         hourlyDto: HourlyWeatherDto,

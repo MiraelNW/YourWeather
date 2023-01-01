@@ -12,8 +12,9 @@ import com.example.yourweather.domain.entity.DailyWeatherInfo
 import com.example.yourweather.domain.entity.HourlyWeatherInfo
 import com.example.yourweather.domain.WeatherRepository
 import kotlinx.coroutines.delay
+import javax.inject.Inject
 
-class WeatherRepositoryImpl(
+class WeatherRepositoryImpl @Inject constructor(
     private val weatherInfoDao: WeatherInfoDao,
     private val mapper: Mapper,
 ) : WeatherRepository {

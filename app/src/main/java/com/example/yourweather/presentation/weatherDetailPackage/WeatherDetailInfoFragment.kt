@@ -1,5 +1,6 @@
 package com.example.yourweather.presentation.weatherDetailPackage
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,21 +10,34 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.yourweather.R
+import com.example.yourweather.utils.ViewModelFactory
+import com.example.yourweather.utils.WeatherApp
 import com.example.yourweather.databinding.WeatherDetatilInfoFragmentBinding
 import com.example.yourweather.presentation.weatherDetailPackage.WeatherDetailAdapter.HourlyWeatherAdapter
 import com.squareup.picasso.Picasso
-import java.time.ZonedDateTime
+import javax.inject.Inject
 import kotlin.math.roundToInt
 
 class WeatherDetailInfoFragment : Fragment() {
+
+    private val component by lazy {
+        (requireActivity().application as WeatherApp).component
+    }
 
     private var _binding: WeatherDetatilInfoFragmentBinding? = null
     private val binding: WeatherDetatilInfoFragmentBinding
         get() = _binding ?: throw RuntimeException("FragmentDetailWeatherInfoBinding is null")
 
-    private val viewModel by lazy {
-        ViewModelProvider(this)[WeatherDetailInfoViewModel::class.java]
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+    private lateinit var viewModel: WeatherDetailInfoViewModel
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,6 +50,8 @@ class WeatherDetailInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel =
+            ViewModelProvider(this, viewModelFactory)[WeatherDetailInfoViewModel::class.java]
         observeViewModel()
     }
 
@@ -46,7 +62,7 @@ class WeatherDetailInfoFragment : Fragment() {
 
     private fun observeViewModel() {
         val date = parseArgsDate()
-        Log.d("time", date)
+        Log.d("time", followingDay(date))
         val adapter = HourlyWeatherAdapter()
         binding.hourlyWeatherRv.adapter = adapter
 
@@ -54,6 +70,12 @@ class WeatherDetailInfoFragment : Fragment() {
             .observe(viewLifecycleOwner) {
                 adapter.submitList(it)
             }
+
+        viewModel.dailyWeather(followingDay(date)).observe(viewLifecycleOwner) {
+            binding.sunrise.text = String.format("Sunrise: %s", it.sunrise.toString().substring(11))
+            binding.sunset.text = String.format("Sunset: %s", it.sunset.toString().substring(11))
+        }
+
         viewModel.hourlyWeather(getDateFrom(date))
             .observe(viewLifecycleOwner) {
                 val weatherInfo = it
@@ -101,6 +123,7 @@ class WeatherDetailInfoFragment : Fragment() {
     private fun parseArgsDate(): String {
         return requireArguments().getString(DATE) ?: ""
     }
+
     private fun parseArgsWeekday(): String {
         return requireArguments().getString(NAME_OF_WEEKDAY) ?: ""
     }
@@ -113,6 +136,11 @@ class WeatherDetailInfoFragment : Fragment() {
         return date + "T23:00"
     }
 
+    private fun followingDay(date: String): String {
+        val day = date.substring(8).toInt() + 1
+        return date.substring(0, 8) + "0" + day.toString()
+    }
+
     companion object {
         private const val DATE = "date"
         private const val NAME_OF_WEEKDAY = "nameOfWeekDay"
@@ -120,7 +148,7 @@ class WeatherDetailInfoFragment : Fragment() {
             return WeatherDetailInfoFragment().apply {
                 arguments = Bundle().apply {
                     putString(DATE, date)
-                    putString(NAME_OF_WEEKDAY,nameOfWeekDay)
+                    putString(NAME_OF_WEEKDAY, nameOfWeekDay)
                 }
             }
         }

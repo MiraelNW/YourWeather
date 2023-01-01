@@ -16,8 +16,6 @@ class WeatherActivity : AppCompatActivity() {
         ActivityWeatherBinding.inflate(layoutInflater)
     }
 
-    val scope = CoroutineScope(Dispatchers.IO)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)

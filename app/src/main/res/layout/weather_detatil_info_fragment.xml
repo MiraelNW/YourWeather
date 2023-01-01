@@ -38,6 +38,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
         </com.google.android.material.card.MaterialCardView>
 
 
@@ -57,8 +58,8 @@
 
             <ImageView
                 android:id="@+id/weather_image"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:layout_gravity="center"
                 tools:src="@drawable/ic_broken_clouds" />
         </com.google.android.material.card.MaterialCardView>
@@ -88,7 +89,7 @@
                     android:text="Humidity: %s%%"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="32sp"
+                    android:textSize="26sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -100,7 +101,7 @@
                     android:text="Wind speed: %s"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="32sp"
+                    android:textSize="26sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/humidity" />
@@ -112,7 +113,7 @@
                     android:text="Short wave radiation %s"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="32sp"
+                    android:textSize="26sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/windSpeed" />
@@ -124,10 +125,32 @@
                     android:text="Visibility: %s metres"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="32sp"
+                    android:textSize="26sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/shortwaveRadiation" />
+                <TextView
+                    android:id="@+id/sunset"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sunset:"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="26sp"
+                    app:layout_constraintTop_toBottomOf="@+id/visibility"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+                <TextView
+                    android:id="@+id/sunrise"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="sunrise:"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="26sp"
+                    app:layout_constraintTop_toBottomOf="@+id/sunset"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

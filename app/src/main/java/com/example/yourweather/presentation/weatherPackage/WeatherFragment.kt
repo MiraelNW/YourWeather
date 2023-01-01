@@ -1,5 +1,6 @@
 package com.example.yourweather.presentation.weatherPackage
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.yourweather.R
+import com.example.yourweather.utils.ViewModelFactory
+import com.example.yourweather.utils.WeatherApp
 import com.example.yourweather.databinding.MainWeatherFragmentBinding
 import com.example.yourweather.domain.entity.DailyWeatherInfo
 import com.example.yourweather.presentation.weatherPackage.WeatherAdapter.DailyWeatherAdapter
@@ -16,17 +19,27 @@ import com.example.yourweather.presentation.weatherDetailPackage.WeatherDetailIn
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 import java.time.ZonedDateTime
+import javax.inject.Inject
 import kotlin.math.roundToInt
 
 class WeatherFragment : Fragment() {
 
-    private val viewModel by lazy {
-        ViewModelProvider(this)[WeatherViewModel::class.java]
+    private val component by lazy {
+        (requireActivity().application as WeatherApp).component
     }
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+    private lateinit var viewModel: WeatherViewModel
 
     private var _binding: MainWeatherFragmentBinding? = null
     private val binding: MainWeatherFragmentBinding
         get() = _binding ?: throw RuntimeException("MainWeatherFragmentBinding is null")
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +52,8 @@ class WeatherFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this, viewModelFactory)[WeatherViewModel::class.java]
+
         val adapter = DailyWeatherAdapter()
         binding.DailyWeatherRv.adapter = adapter
 
@@ -73,8 +88,6 @@ class WeatherFragment : Fragment() {
 
     private fun bindViews() {
         lifecycleScope.launch {
-            Log.d("time", getCurrDate())
-            Log.d("time", ZonedDateTime.now().toString().substring(0, 10))
             viewModel.hourlyWeather(getCurrDate()).observe(viewLifecycleOwner) {
                 val weatherInfo = it
                 binding.apparentTemperature.text =

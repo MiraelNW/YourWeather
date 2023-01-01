@@ -1,10 +1,7 @@
 package com.example.yourweather.presentation.searchPackage
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.yourweather.data.local.AppDataBase
 import com.example.yourweather.data.mapper.Mapper
 import com.example.yourweather.data.repositoryImpl.WeatherRepositoryImpl
@@ -17,17 +14,9 @@ import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
 
-class SearchViewModel(
-    application: Application
-) : AndroidViewModel(application) {
-@Inject
-    val mapper = Mapper()
-    val dao = AppDataBase.getInstance(application).weatherInfoDao()
-    val repo = WeatherRepositoryImpl(dao, mapper)
-
-    val scope = CoroutineScope(Dispatchers.IO)
-
-    val useCase2 = LoadDataUseCase(repo)
+class SearchViewModel @Inject constructor(
+    private val loadData : LoadDataUseCase
+) : ViewModel() {
 
     private var _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> get() = _loading
@@ -41,7 +30,7 @@ class SearchViewModel(
                 _error.value = false
                 _loading.value = true
                 try {
-                    useCase2(cityName)
+                    loadData(cityName)
                 } catch (e: Exception) {
                     _error.value = true
                 }
