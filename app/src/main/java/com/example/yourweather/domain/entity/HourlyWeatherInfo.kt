@@ -2,6 +2,7 @@ package com.example.yourweather.domain.entity
 
 data class HourlyWeatherInfo(
     var hourlyTime: String,
+    var dayOfWeek: String,
     var apparentTemperature: Double,
     var snowfall: Double,
     var visibility: Double,
@@ -10,5 +11,6 @@ data class HourlyWeatherInfo(
     var shortwaveRadiation: Double,
     var relativehumidity_2m: Int,
     var temperature_2m: Double,
+    var hourlyweathercode: Int,
 
 )

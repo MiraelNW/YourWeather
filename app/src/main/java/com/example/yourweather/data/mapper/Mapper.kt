@@ -16,6 +16,7 @@ class Mapper {
         hour: Int
     ) = HourlyWeatherDbModel(
         hourlyTime = hourlyDto.time[hour],
+        dayOfWeek = mapTimeToDayOfWeek(hourlyDto.time[hour].substring(0,10)) ,
         apparentTemperature = hourlyDto.apparentTemperature[hour],
         snowfall = hourlyDto.snowfall[hour],
         visibility = hourlyDto.visibility[hour],
@@ -23,7 +24,8 @@ class Mapper {
         windDirection10m = hourlyDto.windDirection10m[hour],
         shortwaveRadiation = hourlyDto.shortwaveRadiation[hour],
         relativehumidity_2m = hourlyDto.relativehumidity_2m[hour],
-        temperature_2m = hourlyDto.temperature_2m[hour]
+        temperature_2m = hourlyDto.temperature_2m[hour],
+        hourlyweathercode = hourlyDto.hourlyweathercode[hour]
 
     )
 
@@ -45,6 +47,7 @@ class Mapper {
         hourlyWeatherDbModel: HourlyWeatherDbModel,
     ) = HourlyWeatherInfo(
         hourlyTime = hourlyWeatherDbModel.hourlyTime,
+        dayOfWeek =hourlyWeatherDbModel.dayOfWeek ,
         apparentTemperature = hourlyWeatherDbModel.apparentTemperature,
         snowfall = hourlyWeatherDbModel.snowfall,
         visibility = hourlyWeatherDbModel.visibility,
@@ -52,13 +55,15 @@ class Mapper {
         windDirection10m = hourlyWeatherDbModel.windDirection10m,
         shortwaveRadiation = hourlyWeatherDbModel.shortwaveRadiation,
         relativehumidity_2m = hourlyWeatherDbModel.relativehumidity_2m,
-        temperature_2m = hourlyWeatherDbModel.temperature_2m
+        temperature_2m = hourlyWeatherDbModel.temperature_2m,
+        hourlyweathercode = hourlyWeatherDbModel.hourlyweathercode
     )
 
     fun mapDailyWeatherDbToDailyWeatherInfo(
         dailyWeatherDbModel: DailyWeatherDbModel,
     ) = DailyWeatherInfo(
-        dailyTime = mapDailyTime(dailyWeatherDbModel.dailyTime),
+        dayOfWeek = mapTimeToDayOfWeek(dailyWeatherDbModel.dailyTime),
+        dailyTime = dailyWeatherDbModel.dailyTime,
         sunrise =dailyWeatherDbModel.sunrise,
         sunset = dailyWeatherDbModel.sunset,
         apparentTemperatureMax = dailyWeatherDbModel.apparentTemperatureMax,
@@ -68,8 +73,8 @@ class Mapper {
         temperature_2m_max = dailyWeatherDbModel.temperature_2m_max
     )
 
-    private fun mapDailyTime(dailyTime: String): String {
-        val date = SimpleDateFormat("yyyy-MM-dd").parse(dailyTime)
+    private fun mapTimeToDayOfWeek(time: String): String {
+        val date = SimpleDateFormat("yyyy-MM-dd").parse(time)
         val calendar = Calendar.getInstance()
         date?.let {
             calendar.time = it

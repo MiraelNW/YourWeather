@@ -30,5 +30,8 @@ data class HourlyWeatherDto(
     var relativehumidity_2m: List<Int>,
     @SerializedName("temperature_2m")
     @Expose
-    var temperature_2m: List<Double>
+    var temperature_2m: List<Double> ,
+    @SerializedName("weathercode")
+    @Expose
+    var hourlyweathercode: List<Int>
 )

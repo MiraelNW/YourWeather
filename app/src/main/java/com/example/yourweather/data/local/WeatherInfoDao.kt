@@ -23,6 +23,12 @@ interface WeatherInfoDao {
     @Query("SELECT * FROM DailyWeatherTable")
     fun getListDailyWeatherByTime(): LiveData<List<DailyWeatherDbModel>>
 
+    @Query("SELECT * FROM HourlyWeatherTable WHERE hourlyTime BETWEEN :dateFrom and :dateTo ")
+    fun getListHourlyWeatherByTime(
+        dateFrom: String,
+        dateTo: String
+    ): LiveData<List<HourlyWeatherDbModel>>
+
     @Query("SELECT * FROM DailyWeatherTable WHERE dailyTime =:dailyTime")
     fun getDailyWeatherByTime(dailyTime: String): LiveData<DailyWeatherDbModel>
 }

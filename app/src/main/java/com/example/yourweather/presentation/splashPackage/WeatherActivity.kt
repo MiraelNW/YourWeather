@@ -1,4 +1,4 @@
-package com.example.yourweather.presentation
+package com.example.yourweather.presentation.splashPackage
 
 import android.content.Context
 import android.content.Intent
@@ -6,13 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.yourweather.R
 import com.example.yourweather.databinding.ActivityWeatherBinding
+import com.example.yourweather.presentation.weatherPackage.WeatherFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 
 class WeatherActivity : AppCompatActivity() {
-
-
-
 
     private val binding by lazy {
         ActivityWeatherBinding.inflate(layoutInflater)
@@ -32,7 +30,7 @@ class WeatherActivity : AppCompatActivity() {
     companion object{
         private const val CITY_NAME = "cityName"
         fun newIntent(context: Context, cityName : String):Intent{
-            val intent = Intent(context,WeatherActivity::class.java)
+            val intent = Intent(context, WeatherActivity::class.java)
             intent.putExtra(CITY_NAME,cityName)
             return intent
         }

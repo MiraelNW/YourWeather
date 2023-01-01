@@ -20,6 +20,7 @@ interface ApiService {
         @Query("hourly") shortwave_radiation: String = "shortwave_radiation",
         @Query("hourly") relativehumidity_2m: String = "relativehumidity_2m",
         @Query("hourly") temperature_2m: String = "temperature_2m",
+        @Query("hourly") hourlyweathercode: String = "weathercode",
         @Query("daily") sunrise: String = "sunrise",
         @Query("daily") sunset: String = "sunset",
         @Query("daily") apparent_temperature_max: String = "apparent_temperature_max",

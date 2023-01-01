@@ -10,7 +10,9 @@ interface WeatherRepository {
 
     fun getListDailyWeather(): LiveData<List<DailyWeatherInfo>>
 
-    suspend fun getHourlyWeatherByTheTime(time: String): LiveData<HourlyWeatherInfo>
+    fun getListHourlyWeather(dateFrom: String, dateTo: String): LiveData<List<HourlyWeatherInfo>>
 
-    suspend fun loadCordsFromCityName(cityName:String)
+    fun getHourlyWeatherByTheTime(time: String): LiveData<HourlyWeatherInfo>
+
+    suspend fun loadCordsFromCityName(cityName: String)
 }

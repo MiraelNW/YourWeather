@@ -1,4 +1,4 @@
-package com.example.yourweather.presentation
+package com.example.yourweather.presentation.splashPackage
 
 import android.content.Context
 import android.graphics.Color
@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.yourweather.R
 import com.example.yourweather.databinding.SplashFragmentBinding
+import com.example.yourweather.presentation.searchPackage.SearchFragment
 import com.mikhaellopez.rxanimation.*
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 
@@ -119,7 +120,7 @@ class SplashFragment : Fragment() {
             )
                 .doOnTerminate {
                    requireActivity().supportFragmentManager.beginTransaction()
-                       .replace(R.id.fragment_container_splash_search,SearchFragment.newInstance())
+                       .replace(R.id.fragment_container_splash_search, SearchFragment.newInstance())
                        .commit()
                 }
                 .subscribe()

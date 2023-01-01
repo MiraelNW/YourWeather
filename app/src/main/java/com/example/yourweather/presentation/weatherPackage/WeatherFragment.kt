@@ -1,4 +1,4 @@
-package com.example.yourweather.presentation
+package com.example.yourweather.presentation.weatherPackage
 
 import android.os.Bundle
 import android.util.Log
@@ -10,10 +10,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.yourweather.R
 import com.example.yourweather.databinding.MainWeatherFragmentBinding
-import com.example.yourweather.presentation.WeatherAdapter.WeatherAdapter
+import com.example.yourweather.domain.entity.DailyWeatherInfo
+import com.example.yourweather.presentation.weatherPackage.WeatherAdapter.DailyWeatherAdapter
+import com.example.yourweather.presentation.weatherDetailPackage.WeatherDetailInfoFragment
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 import java.time.ZonedDateTime
+import kotlin.math.roundToInt
 
 class WeatherFragment : Fragment() {
 
@@ -36,25 +39,21 @@ class WeatherFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = WeatherAdapter()
+        val adapter = DailyWeatherAdapter()
         binding.DailyWeatherRv.adapter = adapter
 
         viewModel.weatherList.invoke().observe(viewLifecycleOwner) {
             adapter.submitList(it)
-        }
-
-        adapter.onWeekdayClickListener = object : WeatherAdapter.OnWeekdayClickListener {
-            override fun onWeekdayClick(date: String) {
-                loadWeatherDetailFragment(date)
+            adapter.onWeekdayClickListener = object : DailyWeatherAdapter.OnWeekdayClickListener {
+                override fun onWeekdayClick(dailyWeatherInfo: DailyWeatherInfo) {
+                    loadWeatherDetailFragment(
+                        dailyWeatherInfo.dailyTime,
+                        dailyWeatherInfo.dayOfWeek
+                    )
+                }
             }
-
         }
         bindViews()
-        val currDate = ZonedDateTime.now().toString().substring(0, 9) +
-                (ZonedDateTime.now().toString().substring(9, 10).toInt() + 1).toString()
-        binding.todayMaterialCard.setOnClickListener {
-            loadWeatherDetailFragment(currDate)
-        }
     }
 
     override fun onDestroyView() {
@@ -62,32 +61,37 @@ class WeatherFragment : Fragment() {
         _binding = null
     }
 
-    private fun loadWeatherDetailFragment(date :String) {
+    private fun loadWeatherDetailFragment(date: String, nameOfWeekDay: String) {
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_weather_container, WeatherDetailInfoFragment.newInstance(date))
+            .replace(
+                R.id.fragment_weather_container,
+                WeatherDetailInfoFragment.newInstance(date, nameOfWeekDay)
+            )
             .addToBackStack(null)
             .commit()
     }
 
     private fun bindViews() {
         lifecycleScope.launch {
-            Log.d("main", ZonedDateTime.now().toString().substring(8, 9))
-            viewModel.dailyWeather(
-                ZonedDateTime.now().toString().substring(0, 9) +
-                        (ZonedDateTime.now().toString().substring(9, 10).toInt() + 1).toString()
-            ).observe(viewLifecycleOwner) {
+            Log.d("time", getCurrDate())
+            Log.d("time", ZonedDateTime.now().toString().substring(0, 10))
+            viewModel.hourlyWeather(getCurrDate()).observe(viewLifecycleOwner) {
+                val weatherInfo = it
                 binding.apparentTemperature.text =
-                    String.format("%s°", it.apparentTemperatureMax?.toInt().toString())
-                setImage(it.weatherCode ?: ERROR)
-            }
-            viewModel.hourlyWeather(
-                ZonedDateTime.now().toString().substring(0, 14) + "00"
-            ).observe(viewLifecycleOwner) {
+                    String.format("%s°", it.apparentTemperature.roundToInt().toString())
                 binding.humidity.text =
                     String.format("Humidity: %s%%", it.relativehumidity_2m.toString())
                 binding.windSpeed.text =
                     String.format("Wind speed: \n %s km/h", it.windSpeed10m.toString())
+                setImage(it.hourlyweathercode)
+                binding.todayMaterialCard.setOnClickListener {
+                    loadWeatherDetailFragment(
+                        weatherInfo.hourlyTime.substring(0, 10),
+                        weatherInfo.dayOfWeek
+                    )
+                }
             }
+//
         }
     }
 
@@ -103,7 +107,6 @@ class WeatherFragment : Fragment() {
                 .into(binding.weatherImage)
             else -> {
                 Picasso.get().load(R.drawable.ic_unknown).into(binding.weatherImage)
-                Log.d("Err", weatherCode.toString())
             }
 
         }
@@ -113,6 +116,9 @@ class WeatherFragment : Fragment() {
         return requireArguments().getString(CITY_NAME) ?: ""
     }
 
+    private fun getCurrDate(): String {
+        return ZonedDateTime.now().toString().substring(0, 14) + "00"
+    }
 
     companion object {
 

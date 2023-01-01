@@ -2,17 +2,17 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainCard"
     android:layout_width="120dp"
     android:layout_height="200dp"
     android:layout_margin="4dp"
     app:cardCornerRadius="20dp"
-
     app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/purple_500">
+       >
 
         <TextView
             android:id="@+id/nameOfTheDayTv"

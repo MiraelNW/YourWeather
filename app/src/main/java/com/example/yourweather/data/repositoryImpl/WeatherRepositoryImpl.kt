@@ -20,7 +20,6 @@ class WeatherRepositoryImpl(
 
     override fun getDailyWeatherByTheTime(time: String): LiveData<DailyWeatherInfo> {
         return Transformations.map(weatherInfoDao.getDailyWeatherByTime(time)) {
-            Log.d("main",time)
             mapper.mapDailyWeatherDbToDailyWeatherInfo(it)
         }
     }
@@ -33,9 +32,16 @@ class WeatherRepositoryImpl(
         }
     }
 
-    override suspend fun getHourlyWeatherByTheTime(time: String): LiveData<HourlyWeatherInfo> {
+    override fun getListHourlyWeather(dateFrom :String,dateTo:String): LiveData<List<HourlyWeatherInfo>> {
+        return Transformations.map(weatherInfoDao.getListHourlyWeatherByTime(dateFrom, dateTo)) {
+            it.map {
+                mapper.mapHourlyWeatherDbToHourlyWeatherInfo(it)
+            }
+        }
+    }
+
+    override  fun getHourlyWeatherByTheTime(time: String): LiveData<HourlyWeatherInfo> {
         return Transformations.map(weatherInfoDao.getHourlyWeatherByTime(time)) {
-            Log.d("time",time)
             mapper.mapHourlyWeatherDbToHourlyWeatherInfo(it)
         }
 

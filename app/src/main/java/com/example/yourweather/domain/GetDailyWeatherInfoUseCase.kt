@@ -1,7 +1,11 @@
 package com.example.yourweather.domain
 
-class GetDailyWeatherInfoUseCase(private val repository: WeatherRepository) {
-      suspend operator fun invoke(
-          time:String
-     ) =repository.getDailyWeatherByTheTime(time)
+import javax.inject.Inject
+
+class GetDailyWeatherInfoUseCase @Inject constructor(
+    private val repository: WeatherRepository
+) {
+    operator fun invoke(
+        time: String
+    ) = repository.getDailyWeatherByTheTime(time)
 }

@@ -10,6 +10,7 @@ import com.example.yourweather.data.local.Converters
 data class HourlyWeatherDbModel(
     @PrimaryKey
     var hourlyTime: String,
+    var dayOfWeek: String,
     var apparentTemperature: Double,
     var snowfall: Double,
     var visibility: Double,
@@ -17,5 +18,6 @@ data class HourlyWeatherDbModel(
     var windDirection10m: Int,
     var shortwaveRadiation: Double,
     var relativehumidity_2m: Int,
+    var hourlyweathercode: Int,
     var temperature_2m: Double,
 )

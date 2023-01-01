@@ -1,22 +1,15 @@
-package com.example.yourweather.presentation
+package com.example.yourweather.presentation.searchPackage
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.example.yourweather.databinding.SearchFragmentBinding
-import com.example.yourweather.databinding.SplashFragmentBinding
-import com.example.yourweather.presentation.WeatherAdapter.WeatherAdapter
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import com.example.yourweather.presentation.splashPackage.WeatherActivity
 
 class SearchFragment : Fragment() {
 
@@ -45,17 +38,23 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private fun observeViewModel(cityName:String){
+    private fun observeViewModel(cityName: String) {
         viewModel.startLoad(cityName)
-        viewModel.loading.observe(viewLifecycleOwner){
-            if(it) {
-                binding.progressBar.progress = View.VISIBLE
-            }else{
-                binding.progressBar.progress = View.GONE
+        viewModel.loading.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.progressBar.progress = ProgressBar.VISIBLE
+            } else {
+                binding.progressBar.progress = ProgressBar.GONE
                 val intent = WeatherActivity.newIntent(requireActivity(), cityName)
                 startActivity(intent)
                 requireActivity().supportFragmentManager.popBackStack()
 
+            }
+        }
+        viewModel.error.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.progressBar.progress = View.VISIBLE
+                Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show()
             }
         }
     }

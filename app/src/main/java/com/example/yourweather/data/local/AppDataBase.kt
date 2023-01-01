@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.yourweather.data.local.models.DailyWeatherDbModel
 import com.example.yourweather.data.local.models.HourlyWeatherDbModel
 
-@Database(entities = [HourlyWeatherDbModel::class, DailyWeatherDbModel::class], version = 9, exportSchema = false)
+@Database(entities = [HourlyWeatherDbModel::class, DailyWeatherDbModel::class], version = 14, exportSchema = false)
 abstract class AppDataBase : RoomDatabase() {
     companion object {
         private const val DB_NAME = "AppDatabase"
