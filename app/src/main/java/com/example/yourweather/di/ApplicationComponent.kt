@@ -2,10 +2,10 @@ package com.example.yourweather.di
 
 import android.app.Application
 import com.example.yourweather.utils.WeatherApp
-import com.example.yourweather.presentation.MainActivity
+import com.example.yourweather.presentation.splashPackage.MainActivity
 import com.example.yourweather.presentation.searchPackage.SearchFragment
 import com.example.yourweather.presentation.splashPackage.SplashFragment
-import com.example.yourweather.presentation.splashPackage.WeatherActivity
+import com.example.yourweather.presentation.weatherPackage.WeatherActivity
 import com.example.yourweather.presentation.weatherDetailPackage.WeatherDetailInfoFragment
 import com.example.yourweather.presentation.weatherPackage.WeatherFragment
 import dagger.BindsInstance
