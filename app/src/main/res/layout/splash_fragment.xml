@@ -1,70 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.splashPackage.SplashFragment"
-    >
+    android:background="#1E90FF"
+    tools:context=".presentation.splashPackage.SplashFragment">
 
-    <RelativeLayout
-        android:id="@+id/rootView"
+
+    <ImageView
+        android:id="@+id/imageViewBigCloud2"
+        android:layout_width="166dp"
+        android:layout_height="161dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="124dp"
+        android:src="@drawable/ic_splash_screen_main_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.983"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewBigDarkCloud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="256dp"
+        android:src="@drawable/ic_splash_big_cloud"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewSmallCloud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="216dp"
+        android:src="@drawable/ic_splash_small_cloud"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.077"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewEllipse"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_sun"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.444" />
+
+    <ImageView
+        android:id="@+id/imageViewBigCloud"
+        android:layout_width="166dp"
+        android:layout_height="161dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="232dp"
+        android:src="@drawable/ic_splash_screen_main_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/welcomeTextView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/splash_bg"
-        android:fitsSystemWindows="true"
-        tools:context=".ui.splash.SplashFragment">
+        android:layout_height="wrap_content"
+        android:text="Welcome"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textSize="48sp"
+        android:layout_marginBottom="86dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageViewBigCloud"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="50dp"
-            android:src="@drawable/ic_splash_big_cloud" />
 
-        <ImageView
-            android:id="@+id/imageViewSmallCloud"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="125dp"
-            android:layout_marginEnd="50dp"
-            android:src="@drawable/ic_splash_small_cloud" />
-
-        <ImageView
-            android:id="@+id/imageViewEllipse"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="100dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_splash_bg_ellipse" />
-
-        <ImageView
-            android:id="@+id/imageViewBottomDrawableShadow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="220dp"
-            android:src="@drawable/ic_splash_bottom_drawable_shadow_drawable" />
-
-        <ImageView
-            android:id="@+id/imageViewBottomDrawable"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:scaleType="center"
-            android:src="@drawable/ic_splash_bottom_drawable" />
-
-        <ImageView
-            android:id="@+id/imageViewMainCloud"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/imageViewEllipse"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_splash_screen_main_logo" />
-
-    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -68,6 +68,8 @@ class WeatherFragment : Fragment() {
                 }
             }
         }
+        binding.cityName.text =
+            String.format("Current weather in %s", parseArgs().replaceFirstChar { it.uppercase() })
         bindViews()
     }
 

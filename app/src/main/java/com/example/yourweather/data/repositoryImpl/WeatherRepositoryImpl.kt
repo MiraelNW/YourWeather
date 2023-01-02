@@ -71,6 +71,5 @@ class WeatherRepositoryImpl @Inject constructor(
                 )
             )
         }
-        //Log.d("bad","end loading")
     }
 }
