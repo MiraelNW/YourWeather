@@ -16,5 +16,6 @@
     <color name="barColor">#FFF0F5</color>
     <color name="barColor2">#B0C4DE</color>
     <color name="splashBarColor2">#1E90FF</color>
+    <color name="errorColor">#E30E0E</color>
     <color name="darkCyan">#008B8B</color>
 </resources>

@@ -32,37 +32,46 @@ class DailyWeatherAdapter :
         with(holder.binding) {
             when (position) {
                 0 -> {
-                    val color = ContextCompat.getColor(holder.itemView.context,R.color.gold)
+                    val color = ContextCompat.getColor(holder.itemView.context, R.color.gold)
                     mainCard.setCardBackgroundColor(ColorStateList.valueOf(color))
                 }
                 1 -> {
-                    val color =ContextCompat.getColor(holder.itemView.context, R.color.Magenta)
+                    val color = ContextCompat.getColor(holder.itemView.context, R.color.Magenta)
                     mainCard.setCardBackgroundColor(ColorStateList.valueOf(color))
                 }
                 2 -> {
-                    val color =ContextCompat.getColor(holder.itemView.context, R.color.darkCyan)
+                    val color = ContextCompat.getColor(holder.itemView.context, R.color.darkCyan)
                     mainCard.setCardBackgroundColor(ColorStateList.valueOf(color))
                 }
                 3 -> {
-                    val color =ContextCompat.getColor(holder.itemView.context, R.color.indigo)
+                    val color = ContextCompat.getColor(holder.itemView.context, R.color.indigo)
                     mainCard.setCardBackgroundColor(ColorStateList.valueOf(color))
                 }
                 4 -> {
-                    val color =ContextCompat.getColor(holder.itemView.context, R.color.lime)
+                    val color = ContextCompat.getColor(holder.itemView.context, R.color.lime)
                     mainCard.setCardBackgroundColor(ColorStateList.valueOf(color))
                 }
                 5 -> {
-                    val color =ContextCompat.getColor(holder.itemView.context, R.color.royalBlue)
+                    val color = ContextCompat.getColor(holder.itemView.context, R.color.royalBlue)
                     mainCard.setCardBackgroundColor(ColorStateList.valueOf(color))
                 }
             }
 
             apparentTemperatureTv.text =
-                String.format("%s°", weatherInfo.apparentTemperatureMax?.roundToInt().toString())
+                String.format(
+                    holder.itemView.context.getString(R.string.temp),
+                    weatherInfo.apparentTemperatureMax?.roundToInt().toString()
+                )
             theHighestTemperature.text =
-                String.format("%s°", weatherInfo.temperature_2m_max?.roundToInt().toString())
+                String.format(
+                    holder.itemView.context.getString(R.string.temp),
+                    weatherInfo.temperature_2m_max?.roundToInt().toString()
+                )
             theLowestTemperature.text =
-                String.format("%s°", weatherInfo.apparentTemperatureMin?.roundToInt().toString())
+                String.format(
+                    holder.itemView.context.getString(R.string.temp),
+                    weatherInfo.apparentTemperatureMin?.roundToInt().toString()
+                )
             nameOfTheDayTv.text = weatherInfo.dayOfWeek
 
             when (weatherInfo.weatherCode) {

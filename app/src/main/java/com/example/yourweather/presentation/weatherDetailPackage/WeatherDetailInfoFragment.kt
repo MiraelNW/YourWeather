@@ -77,8 +77,10 @@ class WeatherDetailInfoFragment : Fragment() {
                 adapter.submitList(it)
             }
         viewModel.dailyWeather(followingDay()).observe(viewLifecycleOwner) {
-            binding.sunrise.text = String.format("Sunrise: %s", it.sunrise.toString().substring(11))
-            binding.sunset.text = String.format("Sunset: %s", it.sunset.toString().substring(11))
+            binding.sunrise.text =
+                String.format(getString(R.string.sunrise), it.sunrise.toString().substring(11))
+            binding.sunset.text =
+                String.format(getString(R.string.sunset), it.sunset.toString().substring(11))
         }
 
         viewModel.hourlyWeather(getDateFrom(date))
@@ -88,19 +90,28 @@ class WeatherDetailInfoFragment : Fragment() {
                     weekDay.text = parseArgsWeekday()
                     setImage(weatherInfo.hourlyweathercode)
                     humidity.text =
-                        String.format("Humidity: %s%%", it.relativehumidity_2m.toString())
+                        String.format(
+                            getString(R.string.humidity),
+                            it.relativehumidity_2m.toString()
+                        )
                     windSpeed.text =
-                        String.format("Wind speed: %s m/s", it.windSpeed10m.roundToInt().toString())
+                        String.format(
+                            getString(R.string.windSpeed),
+                            it.windSpeed10m.roundToInt().toString()
+                        )
                     shortwaveRadiation.text =
-                        String.format("Short wave radiation %s", it.shortwaveRadiation.toString())
+                        String.format(
+                            getString(R.string.waveRadiation),
+                            it.shortwaveRadiation.toString()
+                        )
                     if (it.visibility >= 15000) {
-                        visibility.text = String.format("Visibility: great")
+                        visibility.text = String.format(getString(R.string.greatVisility))
                     } else if (it.visibility >= 10000 && it.visibility < 15000) {
-                        visibility.text = String.format("Visibility: good")
+                        visibility.text = String.format(getString(R.string.goodVisibility))
                     } else if (it.visibility >= 5000 && it.visibility < 10000) {
-                        visibility.text = String.format("Visibility: normal")
+                        visibility.text = String.format(getString(R.string.normalVisibility))
                     } else if (it.visibility >= 0 && it.visibility < 5000) {
-                        visibility.text = String.format("Visibility: bad")
+                        visibility.text = String.format(getString(R.string.badVisibility))
                     }
                 }
             }

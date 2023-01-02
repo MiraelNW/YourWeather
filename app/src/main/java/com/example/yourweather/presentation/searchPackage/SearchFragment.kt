@@ -1,7 +1,9 @@
 package com.example.yourweather.presentation.searchPackage
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,6 +51,8 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.showWeather.setOnClickListener {
             val cityName = binding.cityName.text.toString().trim()
+            val color = ContextCompat.getColor(requireContext(), R.color.black)
+            binding.cityName.backgroundTintList = ColorStateList.valueOf(color)
             viewModel =
                 ViewModelProvider(requireActivity(), viewModelFactory)[SearchViewModel::class.java]
             observeViewModel(cityName)
@@ -56,24 +60,47 @@ class SearchFragment : Fragment() {
     }
 
     private fun observeViewModel(cityName: String) {
-        viewModel.startLoad(cityName)
-        viewModel.loading.observe(viewLifecycleOwner) {
-            if (it) {
-                binding.progressBar.progress = ProgressBar.VISIBLE
-            } else {
-                binding.progressBar.progress = ProgressBar.GONE
-                val intent = WeatherActivity.newIntent(requireActivity(), cityName)
-                startActivity(intent)
-                requireActivity().supportFragmentManager.popBackStack()
+        val validCityName = viewModel.validateCityName(cityName)
+        if (validCityName) {
+            viewModel.startLoad(cityName)
+            viewModel.loading.observe(viewLifecycleOwner) {
+                if (it) {
+                    binding.progressBar.visibility = ProgressBar.VISIBLE
+                } else {
+                    binding.progressBar.visibility = ProgressBar.GONE
 
+                    val intent = WeatherActivity.newIntent(requireActivity(), cityName)
+                    startActivity(intent)
+                    requireActivity().supportFragmentManager.popBackStack()
+
+                }
+            }
+        } else {
+            viewModel.error.observe(viewLifecycleOwner) {
+                val color = ContextCompat.getColor(requireContext(), R.color.errorColor)
+                binding.cityName.backgroundTintList = ColorStateList.valueOf(color)
+                if (it) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Please, use only English letters",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                }
             }
         }
-        viewModel.error.observe(viewLifecycleOwner) {
+
+        viewModel.apiError.observe(viewLifecycleOwner) {
             if (it) {
-                binding.progressBar.progress = View.VISIBLE
-                Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Is your internet work good?",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
+
+
     }
 
     override fun onDestroyView() {

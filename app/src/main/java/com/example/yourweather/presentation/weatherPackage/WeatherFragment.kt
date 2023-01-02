@@ -46,7 +46,9 @@ class WeatherFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = MainWeatherFragmentBinding.inflate(inflater, container, false)
+        if (savedInstanceState == null) {
+            _binding = MainWeatherFragmentBinding.inflate(inflater, container, false)
+        }
         return (binding.root)
     }
 
@@ -69,13 +71,10 @@ class WeatherFragment : Fragment() {
             }
         }
         binding.cityName.text =
-            String.format("Current weather in %s", parseArgs().replaceFirstChar { it.uppercase() })
+            String.format(
+                getString(R.string.currWeather),
+                parseArgs().replaceFirstChar { it.uppercase() })
         bindViews()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun loadWeatherDetailFragment(date: String, nameOfWeekDay: String) {
@@ -93,11 +92,17 @@ class WeatherFragment : Fragment() {
             viewModel.hourlyWeather(getCurrDate()).observe(viewLifecycleOwner) {
                 val weatherInfo = it
                 binding.apparentTemperature.text =
-                    String.format("%s°", it.apparentTemperature.roundToInt().toString())
+                    String.format(
+                        getString(R.string.temp),
+                        it.apparentTemperature.roundToInt().toString()
+                    )
                 binding.humidity.text =
-                    String.format("Humidity: %s%%", it.relativehumidity_2m.toString())
+                    String.format(getString(R.string.humidity), it.relativehumidity_2m.toString())
                 binding.windSpeed.text =
-                    String.format("Wind speed: \n %s km/h", it.windSpeed10m.toString())
+                    String.format(
+                        getString(R.string.wind) + "\n" + getString(R.string.speed),
+                        it.windSpeed10m.toString()
+                    )
                 setImage(it.hourlyweathercode)
                 binding.todayMaterialCard.setOnClickListener {
                     loadWeatherDetailFragment(
@@ -106,7 +111,6 @@ class WeatherFragment : Fragment() {
                     )
                 }
             }
-//
         }
     }
 
@@ -137,7 +141,6 @@ class WeatherFragment : Fragment() {
 
     companion object {
 
-        private const val ERROR = -1
         const val CITY_NAME = "cityName"
 
         fun newInstance(cityName: String): WeatherFragment {

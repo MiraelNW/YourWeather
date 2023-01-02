@@ -74,12 +74,12 @@ class SplashFragment : Fragment() {
                 ),
 
                 RxAnimation.together(
-                    binding.imageViewEllipse.fadeIn(2000L),
-                    binding.welcomeTextView.fadeIn(2000L),
-                    binding.imageViewBigCloud.fadeIn(1000L),
-                    binding.imageViewBigCloud2.fadeIn(1000L),
-                    binding.imageViewBigDarkCloud.fadeIn(1000L),
-                    binding.imageViewSmallCloud.fadeIn(1000L),
+                    binding.imageViewEllipse.fadeIn(1200),
+                    binding.welcomeTextView.fadeIn(1200),
+                    binding.imageViewBigCloud.fadeIn(500),
+                    binding.imageViewBigCloud2.fadeIn(500),
+                    binding.imageViewBigDarkCloud.fadeIn(500),
+                    binding.imageViewSmallCloud.fadeIn(500),
                     binding.imageViewBigCloud.translationX(30F, 1000),
                     binding.imageViewBigDarkCloud.translationX(-30F, 1000),
                     binding.imageViewBigCloud2.translationX(-10F, 1000),
@@ -97,15 +97,15 @@ class SplashFragment : Fragment() {
         disposable.add(
             RxAnimation.sequentially(
                 RxAnimation.together(
-                    binding.imageViewEllipse.fadeOut(300L),
-                    binding.welcomeTextView.fadeOut(300L),
+                    binding.imageViewEllipse.fadeOut(500),
+                    binding.welcomeTextView.fadeOut(500),
                 ),
 
                 RxAnimation.together(
-                    binding.imageViewBigCloud.translationX(-500f, 300L),
-                    binding.imageViewSmallCloud.translationX(-500f, 300L),
-                    binding.imageViewBigCloud2.translationX(500f, 300L),
-                    binding.imageViewBigDarkCloud.translationX(500f, 300L),
+                    binding.imageViewBigCloud.translationX(-500f, 500),
+                    binding.imageViewSmallCloud.translationX(-500f, 500),
+                    binding.imageViewBigCloud2.translationX(500f, 500),
+                    binding.imageViewBigDarkCloud.translationX(500f, 500),
                 ),
 
             )

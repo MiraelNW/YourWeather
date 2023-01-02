@@ -27,7 +27,10 @@ class HourlyWeatherAdapter
         with(holder.binding) {
             nameOfTheDayTv.text = hourlyWeather.hourlyTime.substring(11)
             apparentTemperatureTv.text =
-                String.format("%s°", hourlyWeather.apparentTemperature.roundToInt().toString())
+                String.format(
+                    holder.itemView.context.getString(R.string.temp),
+                    hourlyWeather.apparentTemperature.roundToInt().toString()
+                )
             when (hourlyWeather.hourlyweathercode) {
                 0 -> Picasso.get().load(R.drawable.ic_clear_day).into(weatherImage)
                 1, 2 -> Picasso.get().load(R.drawable.ic_few_clouds).into(weatherImage)
