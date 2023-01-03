@@ -1,4 +1,4 @@
-package com.example.yourweather.presentation.weatherPackage
+package com.example.yourweather.presentation.splashPackage
 
 import android.content.Context
 import android.content.Intent
@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.yourweather.R
 import com.example.yourweather.databinding.ActivityWeatherBinding
+import com.example.yourweather.presentation.weatherPackage.WeatherFragment
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 
 class WeatherActivity : AppCompatActivity() {
 
@@ -20,7 +23,6 @@ class WeatherActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_weather_container, WeatherFragment.newInstance(cityName))
             .commit()
-
     }
 
     companion object{

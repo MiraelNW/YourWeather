@@ -12,18 +12,18 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/ic_mostly_cloudy"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.YourWeather"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.weatherPackage.WeatherActivity"
+            android:name=".presentation.splashPackage.WeatherActivity"
             android:exported="false"
             />
         <activity
-            android:name=".presentation.splashPackage.MainActivity"
+            android:name=".presentation.MainActivity"
             android:windowSoftInputMode="adjustResize"
             android:exported="true">
             <intent-filter>

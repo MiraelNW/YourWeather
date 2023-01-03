@@ -1,16 +1,16 @@
 package com.example.yourweather.presentation.splashPackage
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.yourweather.R
+import com.example.yourweather.utils.WeatherApp
 import com.example.yourweather.databinding.SplashFragmentBinding
 import com.example.yourweather.presentation.searchPackage.SearchFragment
-import com.example.yourweather.utils.WeatherApp
 import com.mikhaellopez.rxanimation.*
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 
@@ -42,18 +42,13 @@ class SplashFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val window = requireActivity().window
-        window.statusBarColor = ContextCompat.getColor(requireActivity(), R.color.splashBarColor2)
         startAnimation()
-
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
         disposable.dispose()
-        val window = requireActivity().window
-        window.statusBarColor =  ContextCompat.getColor(requireActivity(), R.color.barColor)
     }
 
 
@@ -61,31 +56,36 @@ class SplashFragment : Fragment() {
         disposable.add(
             RxAnimation.sequentially(
                 RxAnimation.together(
-                    binding.welcomeTextView.fadeOut(0L),
+                    binding.imageViewBottomDrawable.translationY(500f),
                     binding.imageViewEllipse.fadeOut(0L),
-                    binding.imageViewBigCloud.fadeOut(0L),
-                    binding.imageViewBigCloud2.fadeOut(0L),
-                    binding.imageViewBigDarkCloud.fadeOut(0L),
-                    binding.imageViewSmallCloud.fadeOut(0L),
-                    binding.imageViewBigCloud.translationX(-100F, 0L),
-                    binding.imageViewBigDarkCloud.translationX(200F, 0L),
-                    binding.imageViewBigCloud2.translationX(200F, 0L),
-                    binding.imageViewSmallCloud.translationX(-100f, 0L),
+                    binding.imageViewBottomDrawable.fadeOut(0L),
+                    binding.imageViewBigCloud.translationX(-500F, 0L),
+                    binding.imageViewSmallCloud.translationX(500f, 0L),
+                    binding.imageViewBottomDrawableShadow.translationY(500f),
+                    binding.imageViewMainCloud.fadeOut(0L),
+                    binding.imageViewBottomDrawableShadow.fadeOut(0L)
                 ),
 
                 RxAnimation.together(
-                    binding.imageViewEllipse.fadeIn(2000L),
-                    binding.welcomeTextView.fadeIn(2000L),
-                    binding.imageViewBigCloud.fadeIn(1000L),
-                    binding.imageViewBigCloud2.fadeIn(1000L),
-                    binding.imageViewBigDarkCloud.fadeIn(1000L),
-                    binding.imageViewSmallCloud.fadeIn(1000L),
-                    binding.imageViewBigCloud.translationX(30F, 1000),
-                    binding.imageViewBigDarkCloud.translationX(-30F, 1000),
-                    binding.imageViewBigCloud2.translationX(-10F, 1000),
-                    binding.imageViewSmallCloud.translationX(25F, 1000),
+                    binding.imageViewBottomDrawable.fadeIn(1000L),
+                    binding.imageViewBottomDrawable.translationY(-1f),
+                    binding.imageViewBottomDrawableShadow.fadeIn(1250L),
+                    binding.imageViewBottomDrawableShadow.translationY(-1f)
+                ),
+
+                RxAnimation.together(
+                    binding.imageViewEllipse.fadeIn(1000L),
+                    binding.imageViewEllipse.translationY(-50F, 1000L)
+                ),
+
+                RxAnimation.together(
+                    binding.imageViewBigCloud.translationX(-15f, 1000L),
+                    binding.imageViewSmallCloud.translationX(25f, 1000L)
+                ),
+
+                binding.imageViewMainCloud.fadeIn(500L),
+
                 )
-            )
                 .doOnTerminate() {
                     endSplashAnimation()
                 }
@@ -97,17 +97,29 @@ class SplashFragment : Fragment() {
         disposable.add(
             RxAnimation.sequentially(
                 RxAnimation.together(
-                    binding.imageViewEllipse.fadeOut(300L),
-                    binding.welcomeTextView.fadeOut(300L),
+                    binding.imageViewBottomDrawable.fadeOut(300L),
+                    binding.imageViewBottomDrawable.translationY(100f),
+                    binding.imageViewBottomDrawableShadow.fadeOut(300L),
+                    binding.imageViewBottomDrawableShadow.translationY(100f)
                 ),
 
                 RxAnimation.together(
-                    binding.imageViewBigCloud.translationX(-500f, 300L),
-                    binding.imageViewSmallCloud.translationX(-500f, 300L),
-                    binding.imageViewBigCloud2.translationX(500f, 300L),
-                    binding.imageViewBigDarkCloud.translationX(500f, 300L),
+                    binding.imageViewEllipse.fadeOut(300L),
+                    binding.imageViewEllipse.translationY(500F, 300L)
                 ),
 
+                RxAnimation.together(
+                    binding.imageViewBigCloud.translationX(500f, 300L),
+                    binding.imageViewSmallCloud.translationX(-500f, 300L)
+                ),
+
+                binding.imageViewMainCloud.fadeOut(300L),
+
+                binding.rootView.backgroundColor(
+                    Color.parseColor("#5D50FE"),
+                    Color.parseColor("#FFFFFF"),
+                    duration = 750L
+                )
             )
                 .doOnTerminate {
                     requireActivity().supportFragmentManager.beginTransaction()

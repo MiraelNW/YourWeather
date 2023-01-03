@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -16,7 +15,6 @@ import com.example.yourweather.utils.WeatherApp
 import com.example.yourweather.databinding.WeatherDetatilInfoFragmentBinding
 import com.example.yourweather.presentation.weatherDetailPackage.WeatherDetailAdapter.HourlyWeatherAdapter
 import com.squareup.picasso.Picasso
-import java.time.ZonedDateTime
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
@@ -55,20 +53,16 @@ class WeatherDetailInfoFragment : Fragment() {
         viewModel =
             ViewModelProvider(this, viewModelFactory)[WeatherDetailInfoViewModel::class.java]
         observeViewModel()
-
-        val window = requireActivity().window
-        window.statusBarColor = ContextCompat.getColor(requireActivity(), R.color.barColor2)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        val window = requireActivity().window
-        window.statusBarColor = ContextCompat.getColor(requireActivity(), R.color.barColor)
         _binding = null
     }
 
     private fun observeViewModel() {
         val date = parseArgsDate()
+        Log.d("time", followingDay(date))
         val adapter = HourlyWeatherAdapter()
         binding.hourlyWeatherRv.adapter = adapter
 
@@ -76,7 +70,8 @@ class WeatherDetailInfoFragment : Fragment() {
             .observe(viewLifecycleOwner) {
                 adapter.submitList(it)
             }
-        viewModel.dailyWeather(followingDay()).observe(viewLifecycleOwner) {
+
+        viewModel.dailyWeather(followingDay(date)).observe(viewLifecycleOwner) {
             binding.sunrise.text = String.format("Sunrise: %s", it.sunrise.toString().substring(11))
             binding.sunset.text = String.format("Sunset: %s", it.sunset.toString().substring(11))
         }
@@ -141,8 +136,9 @@ class WeatherDetailInfoFragment : Fragment() {
         return date + "T23:00"
     }
 
-    private fun followingDay(): String {
-        return ZonedDateTime.now().plusDays(1).toString().substring(0, 10)
+    private fun followingDay(date: String): String {
+        val day = date.substring(8).toInt() + 1
+        return date.substring(0, 8) + "0" + day.toString()
     }
 
     companion object {

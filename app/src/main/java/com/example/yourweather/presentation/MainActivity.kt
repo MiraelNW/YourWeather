@@ -1,4 +1,4 @@
-package com.example.yourweather.presentation.splashPackage
+package com.example.yourweather.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
