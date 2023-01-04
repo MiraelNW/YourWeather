@@ -1,10 +1,13 @@
 # Your weather
 
-![app icon](погода.png) 
+![app icon](weather.png) 
 
 ## Screenchots
+
 ![main weather screen](screen.png)
 ![detail weather screen](detailWeather.png)
+![search screen](splash.png)
+![splash screen](search.png)
 
 ## Highlights
 
